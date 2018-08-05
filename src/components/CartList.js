@@ -13,6 +13,7 @@ const CartList = ({cartItems, cartDetailItems, clearCartItems})=>{
         <Column title="单价" dataIndex="price" key="price" />
         <Column title="单位" dataIndex="unit" key="unit" />
         <Column title="数量" dataIndex="count" key="count" />
+        <Column title="总价" dataIndex="totalPrice" key="totalPrice" />
         <Column
           title="操作"
           key="action"
@@ -43,7 +44,8 @@ const getCartDetailItems = (products, cartItems) =>{
         name: product.name,
         price: product.price,
         unit: product.unit,
-        count: cartItem.productCount
+        count: cartItem.productCount,
+        totalPrice: cartItem.productCount * product.price
       };
   });
 }
