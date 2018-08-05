@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon, Divider } from 'antd';
+import { Table, Icon, Divider, Button } from 'antd';
+import createOrder from '../actions/createOrder';
 const { Column } = Table;
 
-const CartList = ({cartItems})=>{
+
+const CartList = ({cartItems, cartDetailItems, clearCartItems})=>{
     return (
-        <Table dataSource={cartItems}>
+      <div>
+        <Table dataSource={cartDetailItems}>
         <Column title="名称" dataIndex="name" key="name" />
         <Column title="单价" dataIndex="price" key="price" />
         <Column title="单位" dataIndex="unit" key="unit" />
@@ -25,13 +28,18 @@ const CartList = ({cartItems})=>{
             </span>
           )}
         />
-      </Table>                );
+      </Table>
+      <div style={{margin:10, display: cartItems.length === 0 ? "none" : "block"}} >
+        <Button type="primary" onClick={() => createOrder(cartItems, clearCartItems)}>生成订单</Button> 
+      </div>
+    </div>);
 }
 
-const getCartItems = (products, cartItems) =>{
+const getCartDetailItems = (products, cartItems) =>{
   return cartItems.map(cartItem => {
-      let product = products.find(item => item.id == cartItem.productId);
+      let product = products.find(item => item.id === cartItem.productId);
       return {
+        key: product.id,
         name: product.name,
         price: product.price,
         unit: product.unit,
@@ -41,11 +49,12 @@ const getCartItems = (products, cartItems) =>{
 }
 
 const mapStateToProps = ({ products, cartItems }) => ({
-  cartItems: getCartItems(products, cartItems)
+  cartDetailItems: getCartDetailItems(products, cartItems),
+  cartItems
 });
 
 const mapDispatchToProps = dispatch => ({
-
+  clearCartItems: () => dispatch({type:"CLEAR_CARTITEMS"})
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartList);

@@ -5,7 +5,7 @@ const cartItems = (state = initcartItems, action) => {
   switch(action.type){
     case "ADD_PRODUCTTOCART":
       clone = [...state];
-      let product = state.find(item => item.productId == action.productId);
+      let product = state.find(item => item.productId === action.productId);
       if(product != null){
         product.productCount += 1;
       }
@@ -16,6 +16,8 @@ const cartItems = (state = initcartItems, action) => {
         });
       }
       return clone;
+    case "CLEAR_CARTITEMS":
+      return [];
     default:
       return state;
   }
