@@ -3,7 +3,7 @@ import {Layout} from 'antd';
 
 const {Footer} = Layout;
 
-const MallFooter = () => {
+const PageFooter = () => {
     return (                
         <Footer style={{textAlign: 'center'}}>
             TW Mall ©2018 Created by ForCheng
@@ -11,4 +11,4 @@ const MallFooter = () => {
     );
 }
 
-export default MallFooter;
+export default PageFooter;

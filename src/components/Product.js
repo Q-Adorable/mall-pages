@@ -10,7 +10,7 @@ const Product = ({id, name, price, unit, icon})=>{
                 style={{ width: 240 }} 
                 cover={<img alt="example" 
                 src={"./resources/imgs/default.png"} />}
-                actions={[<Icon type="shopping-cart"/>]}
+                actions={[<Icon type="shopping-cart"/>, <Icon type="edit"/>]}
                 >
                 <Meta title={name} description={"单价: " + price + " / " + unit}/>
             </Card>

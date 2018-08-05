@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 const {Header} = Layout;
 
-const MallHeader = ({selectedKeys}) => {
+const PageHeader = ({selectedKeys}) => {
     return (<Header>
         <div className="logo"/>
         <Menu
@@ -27,4 +27,4 @@ const MallHeader = ({selectedKeys}) => {
     );
 }
 
-export default MallHeader;
+export default PageHeader;

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Layout} from 'antd';
-import MallHeader from './MallHeader';
-import MallFooter from './MallFooter';
+import MallHeader from './PageHeader';
+import MallFooter from './PageFooter';
+import CartList from './CartList';
 
 const {Content} = Layout;
 
-class Cart extends Component {
+class CartPage extends Component {
     render() {
         return (
             <Layout className="layout">
@@ -16,7 +17,9 @@ class Cart extends Component {
                         padding: 24,
                         minHeight: 280,
                         marginTop: 30
-                    }}>Cart</div>
+                    }}>
+                        <CartList />
+                    </div>
                 </Content>
                 <MallFooter></MallFooter>
             </Layout>
@@ -24,4 +27,4 @@ class Cart extends Component {
     }
 }
 
-export default Cart;
+export default CartPage;

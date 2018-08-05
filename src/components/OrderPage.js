@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Layout} from 'antd';
-import MallHeader from './MallHeader';
-import MallFooter from './MallFooter';
+import MallHeader from './PageHeader';
+import MallFooter from './PageFooter';
+import OrderList from './OrderList'
 
 const {Content} = Layout;
 
-class Order extends Component {
+class OrderPage extends Component {
     render() {
         return (
             <Layout className="layout">
@@ -16,7 +17,9 @@ class Order extends Component {
                         padding: 24,
                         minHeight: 280,
                         marginTop: 30
-                    }}>Order</div>
+                    }}>
+                        <OrderList/>
+                    </div>
                 </Content>
                 <MallFooter></MallFooter>
             </Layout>
@@ -24,4 +27,4 @@ class Order extends Component {
     }
 }
 
-export default Order;
+export default OrderPage;
