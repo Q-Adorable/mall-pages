@@ -1,11 +1,14 @@
 import React from 'react';
 import { Table, Icon, Divider } from 'antd';
+import removeOrderItemRequest from '../actions/removeOrderItem'
+import updateOrderItemRequest from '../actions/updateOrderItem'
+
 const { Column } = Table;
 
-const OrderItemList = ({id, createTime, orderItems})=>{
-
+const OrderItemList = ({id, createTime, orderItems, updateProductCount, removeOrderItem})=>{
     let orderDetailItems = orderItems.map(item => {
         return {
+            orderId: id,
             key: item.id,
             name: item.product.name,
             price: item.product.price,
@@ -28,13 +31,29 @@ const OrderItemList = ({id, createTime, orderItems})=>{
                     key="action"
                     render={(text, record) => (
                         <span>
-                        <a href="javascript:;">Action 一 {record.name}</a>
-                        <Divider type="vertical" />
-                        <a href="javascript:;">Delete</a>
-                        <Divider type="vertical" />
-                        <a href="javascript:;" className="ant-dropdown-link">
-                            More actions <Icon type="down" />
-                        </a>
+                            <a onClick={() => {
+                                let count = record.count - 1;
+                                if(count > 0){
+                                    updateProductCount(record.orderId, record.key, record.count - 1);
+                                    updateOrderItemRequest(record.orderId, record.key, record.count - 1);
+                                }
+                            }}>
+                                <Icon type="minus" />
+                            </a>
+                            <Divider type="vertical" />
+                            <a onClick={() => {
+                                updateProductCount(record.orderId, record.key, record.count + 1);
+                                updateOrderItemRequest(record.orderId, record.key, record.count + 1);
+                            }}>
+                                <Icon type="plus" />
+                            </a>
+                            <Divider type="vertical" />
+                            <a onClick={()=> {
+                                removeOrderItem(record.orderId, record.key);
+                                removeOrderItemRequest(record.orderId, record.key);
+                                }} className="ant-dropdown-link">
+                                <Icon type="close"/>
+                            </a>
                         </span>
                     )}/>
             </Table>
@@ -42,3 +61,4 @@ const OrderItemList = ({id, createTime, orderItems})=>{
 }
 
 export default OrderItemList;
+``

@@ -10,10 +10,10 @@ class OrderList extends Component{
       }    
 
     render(){
-        const {orders} = this.props;        
+        const {orders, updateProductCount, removeOrderItem} = this.props;        
         return (<div>
             {orders.map(order => <Row key={order.id}>
-                <OrderItemList {...order}/>
+                <OrderItemList {...order} updateProductCount={updateProductCount} removeOrderItem={removeOrderItem}/>
             </Row>)}
         </div>);
     }
@@ -25,6 +25,17 @@ const mapStateToProps = ({ orders }) => ({
 
 const mapDispatchToProps = dispatch => ({
     loadOrders: ()=> {dispatch(loadOrders())},
+    updateProductCount: (orderId, orderItemId, productCount) => dispatch({
+        type:"UPDATE_OrderItem",
+        orderId,
+        orderItemId,
+        productCount
+      }),
+      removeOrderItem: (orderId, orderItemId) => dispatch({
+        type:"REMOVE_OrderItem",
+        orderId,
+        orderItemId
+      }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderList);

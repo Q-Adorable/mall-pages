@@ -19,12 +19,12 @@ const cartItems = (state = initcartItems, action) => {
     case "CLEAR_CARTITEMS":
       return [];
     case "UPDATE_CARTITEM":
-      if(action.count <= 0){
-        return state.filter(item => item.productId !== action.id);
+      if(action.productCount <= 0){
+        return state;
       }
       clone = [...state];
       product = state.find(item => item.productId === action.id);
-      product.productCount = action.count;
+      product.productCount = action.productCount;
       return clone;
     case "REMOVE_CARTITEM":
       return state.filter(item => item.productId !== action.id);
