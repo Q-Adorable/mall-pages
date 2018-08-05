@@ -5,7 +5,7 @@ import createOrder from '../actions/createOrder';
 const { Column } = Table;
 
 
-const CartList = ({cartItems, cartDetailItems, clearCartItems})=>{
+const CartList = ({cartItems, cartDetailItems, clearCartItems, updateProductCount, removeCartItem})=>{
     return (
       <div>
         <Table dataSource={cartDetailItems}>
@@ -19,12 +19,16 @@ const CartList = ({cartItems, cartDetailItems, clearCartItems})=>{
           key="action"
           render={(text, record) => (
             <span>
-              <a href="javascript:;">Action 一 {record.name}</a>
+              <a onClick={() => updateProductCount(record.key, record.count - 1)}>
+                <Icon type="minus" />
+              </a>
               <Divider type="vertical" />
-              <a href="javascript:;">Delete</a>
+              <a onClick={() => updateProductCount(record.key, record.count + 1)}>
+                <Icon type="plus" />
+              </a>
               <Divider type="vertical" />
-              <a href="javascript:;" className="ant-dropdown-link">
-                More actions <Icon type="down" />
+              <a onClick={()=> removeCartItem(record.key)} className="ant-dropdown-link">
+                <Icon type="close"/>
               </a>
             </span>
           )}
@@ -56,7 +60,16 @@ const mapStateToProps = ({ products, cartItems }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearCartItems: () => dispatch({type:"CLEAR_CARTITEMS"})
+  clearCartItems: () => dispatch({type:"CLEAR_CARTITEMS"}),
+  updateProductCount: (id, count) => dispatch({
+    type:"UPDATE_CARTITEM",
+    id,
+    count
+  }),
+  removeCartItem: id => dispatch({
+    type:"REMOVE_CARTITEM",
+    id
+  }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartList);
