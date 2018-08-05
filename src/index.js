@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'antd/dist/antd.css';
-import App from './components/App';
+import AppRouter from './components/AppRouter';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -15,7 +15,7 @@ const store = createStore(reducers,
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <AppRouter />
     </Provider>    
     , document.getElementById('root'));
 registerServiceWorker();

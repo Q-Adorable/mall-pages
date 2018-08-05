@@ -28,8 +28,20 @@ const CartList = ({cartItems})=>{
       </Table>                );
 }
 
-const mapStateToProps = ({ cartItems }) => ({
-  cartItems
+const getCartItems = (products, cartItems) =>{
+  return cartItems.map(cartItem => {
+      let product = products.find(item => item.id == cartItem.productId);
+      return {
+        name: product.name,
+        price: product.price,
+        unit: product.unit,
+        count: cartItem.productCount
+      };
+  });
+}
+
+const mapStateToProps = ({ products, cartItems }) => ({
+  cartItems: getCartItems(products, cartItems)
 });
 
 const mapDispatchToProps = dispatch => ({
